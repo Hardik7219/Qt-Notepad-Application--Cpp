@@ -15,7 +15,7 @@ This project demonstrates file handling, GUI development, and the use of Qt dial
 - Cross-platform (Windows / Linux)
 
 ## Screenshots
-![screenshot of notepad app]<img width="815" height="683" alt="Screenshot_20251221_223334" src="https://github.com/user-attachments/assets/c1a2b3ef-2d18-4c79-8051-fbd68a8a63ad" />
+<img width="815" height="683" alt="Screenshot_20251221_223334" src="https://github.com/user-attachments/assets/c1a2b3ef-2d18-4c79-8051-fbd68a8a63ad" />
 
 
 ## Technologies Used
