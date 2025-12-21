@@ -2,12 +2,8 @@
 #include "ui_mainwindow.h"
 using namespace std;
 
-// #include<iostream>
-// #include<fstream>
-QString areaText;
-QString fileOpen;
-QString filePath;
 QString fileCurrentPath;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -20,23 +16,38 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+void MainWindow::saveFile(QString &path) //save file path
+{
+    QFile file(path);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        out<< ui -> textEdit -> toPlainText();
+        file.close();
+    }
+}
+int MainWindow::ask_saveOrNot() //if file is not saved this will ask to file save or not
+{
+    int S = QMessageBox::question(
+        this,
+        "Confirm",
+        "Do You Want To Save?",
+        QMessageBox::Yes | QMessageBox::No
+        );
+    return S;
+}
 void MainWindow::on_NEW_clicked() //new file and if the screen already hade text then it will clear the screen
 {
-    areaText = ui->textEdit->toPlainText();
     int S;
+
     if(fileCurrentPath.isEmpty())
     {
-        if(!areaText.isEmpty())
+        if(!ui->textEdit->toPlainText().isEmpty())
         {
-            S = QMessageBox::question(
-                this,
-                "Confirm",
-                "Do You Want To Save?",
-                QMessageBox::Yes | QMessageBox::No
-            );
+            S = ask_saveOrNot();
             if(S==QMessageBox::Yes)
             {
+
                 fileCurrentPath = QFileDialog::getSaveFileName(
                     this,
                     "Save file",
@@ -47,25 +58,23 @@ void MainWindow::on_NEW_clicked() //new file and if the screen already hade text
                 {
                     return ;
                 }
-
-                QFile file(fileCurrentPath);
-
-                    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-                {
-                    QTextStream out(&file);
-                        out<< ui -> textEdit -> toPlainText();
-                    file.close();
-                }
+                ui->FILENAME->setText(fileCurrentPath);
+                saveFile(fileCurrentPath);
             }
             else
             {
+
                 ui->textEdit->setText("");
+                ui->FILENAME->setText("Notepad");
+                fileCurrentPath="";
                 return ;
             }
         }
     }
     else{
         ui->textEdit->setText("");
+        ui->FILENAME->setText("Notepad");
+        fileCurrentPath="";
     }
 }
 
@@ -88,29 +97,19 @@ void MainWindow::on_SAVE_clicked() //this funtion will save the file
             return ;
         }
 
-        QFile file(fileCurrentPath);
+        saveFile(fileCurrentPath);
 
-        if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream out(&file);
-            out<< ui -> textEdit -> toPlainText();
-            file.close();
-        }
     }
     else
     {
         /*if the screen is not empty like it is already open a file then
          it will save the existing oepn file not a new file */
 
-        QFile file(fileCurrentPath);
-        if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream out(&file);
-            out<< ui -> textEdit -> toPlainText();
-            file.close();
+        saveFile(fileCurrentPath);
 
-        }
     }
+    ui->FILENAME->setText(fileCurrentPath);
+
 }
 void MainWindow::on_SAVEAS_clicked() //for saving existing file as new file
 {
@@ -126,28 +125,20 @@ void MainWindow::on_SAVEAS_clicked() //for saving existing file as new file
         {
             return ;
         }
-        QFile file(fileCurrentPath);
-        if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream out(&file);
-            out<< ui -> textEdit -> toPlainText();
-            file.close();
-        }
+        saveFile(fileCurrentPath);
+
+        ui->FILENAME->setText(fileCurrentPath);
+
 }
 void MainWindow::on_OPEN_clicked() //open a existing files
 {
-    areaText = ui->textEdit->toPlainText();
     int S;
     if(fileCurrentPath.isEmpty())
     {
-        if(!areaText.isEmpty())
+        if(!ui->textEdit->toPlainText().isEmpty())
         {
-            S = QMessageBox::question(
-                this,
-                "Confirm",
-                "Do You Want To Save?",
-                QMessageBox::Yes | QMessageBox::No
-                );
+            S = ask_saveOrNot();
+
             if(S==QMessageBox::Yes)
             {
                 fileCurrentPath = QFileDialog::getSaveFileName(
@@ -161,14 +152,8 @@ void MainWindow::on_OPEN_clicked() //open a existing files
                     return ;
                 }
 
-                QFile file(fileCurrentPath);
+                saveFile(fileCurrentPath);
 
-                if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-                {
-                    QTextStream out(&file);
-                    out<< ui -> textEdit -> toPlainText();
-                    file.close();
-                }
             }
             else
             {
@@ -188,11 +173,12 @@ void MainWindow::on_OPEN_clicked() //open a existing files
         return ;
     }
     QFile file(fileCurrentPath);
-    if(file.open(QIODevice::ReadWrite | QIODevice::Text))
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream in(&file);
         ui -> textEdit->setPlainText(in.readAll());
-        // areaText = ui->textEdit->toPlainText();
         file.close();
     }
+    ui->FILENAME->setText(fileCurrentPath);
+
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>803</width>
-    <height>627</height>
+    <width>808</width>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>781</width>
-      <height>581</height>
+      <x>0</x>
+      <y>40</y>
+      <width>801</width>
+      <height>561</height>
      </rect>
     </property>
    </widget>
@@ -41,7 +41,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>20</y>
       <width>801</width>
       <height>21</height>
      </rect>
@@ -65,7 +65,7 @@
     <widget class="QPushButton" name="SAVE">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>90</x>
        <y>0</y>
        <width>86</width>
        <height>21</height>
@@ -78,7 +78,7 @@
     <widget class="QPushButton" name="OPEN">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>270</x>
        <y>0</y>
        <width>86</width>
        <height>21</height>
@@ -91,7 +91,7 @@
     <widget class="QPushButton" name="SAVEAS">
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>180</x>
        <y>0</y>
        <width>86</width>
        <height>21</height>
@@ -102,13 +102,26 @@
      </property>
     </widget>
    </widget>
+   <widget class="QLabel" name="FILENAME">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>791</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Notepad</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>803</width>
+     <width>808</width>
      <height>23</height>
     </rect>
    </property>
