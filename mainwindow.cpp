@@ -31,7 +31,7 @@ int MainWindow::ask_saveOrNot() //if file is not saved this will ask to file sav
     int S = QMessageBox::question(
         this,
         "Confirm",
-        "Do You Want To Save?",
+        "Do You Want To Save the File?",
         QMessageBox::Yes | QMessageBox::No
         );
     return S;
