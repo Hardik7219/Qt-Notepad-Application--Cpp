@@ -1,6 +1,6 @@
 ## Author
 Hardik Parmar      
-
+h
 # Qt Notepad Application (C++)
 
 A simple Notepad desktop application built using **C++ and Qt Widgets**.  
