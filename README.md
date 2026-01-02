@@ -1,5 +1,5 @@
 ## Author
-Hardik Parmar  
+Hardik Parmar      
 
 # Qt Notepad Application (C++)
 
